@@ -43,12 +43,29 @@ df2 <- read_excel(tf)
 ## the the first row and make that the column names of the data frame
 colnames(df2) <- df2[1,]
 ```
+```{r}
+# overview of the dataset
+
+glimpse(df1)
+```
+```{r}
+# overview of the dataset 
+
+glimpse(df2)
+```
 
 ### Save Raw Data
 
 ```{r save-data, warning=FALSE} 
 ## use saveRDS() to save each object as a .rds file 
 
+saveRDS(df1, "df_department.rds")
+saveRDS(df2, "df_retail.rds")
+
+```
+
+```{r}
+df1 %>% filter()
 ```
 
 ### Wrangle Data
@@ -73,33 +90,51 @@ df_retail <- df2 %>%
   filter(business == "Retail sales, total "| business=="Department stores ")
 ```
 
+```{r}
+# view the df_retail dataframe
+View(df_retail)
+```
+
+
 ```{r wrangle-df1, warning=FALSE} 
 ## now, your turn!
 ## work with df1
 df_department <- df1 %>% 
   ## split Period column into one column called "month" and one called "year"
-  function_name() %>%
+  separate(col = Period, into = c("month", "year"), sep = "-") %>%
   ## add a column `value` which contains the 
   ## information from the `Value (in millions)` 
-  function_name() %>%
+  mutate(value = `Value (in millions)`) %>%
   ## group the data frame by the `year` column
-  function_name() %>%
+  group_by(year) %>%
   ## Summarize the data by creating a new column
   ## call this column `n` 
   ## have it contain the sum of the `value` column
-  function_name() %>% 
+  summarise(n = sum(value)) %>% 
   ### create a new column called `business`
   ## set the value of this column to  be "department stores" 
   ## for the entire data set 
-  function_name() %>%
+  mutate(business = "department stores") %>%
   ## reorder column names to be : business, year, n
-  function_name()
+  select(business, year, n)
 ```
+
+```{r}
+# view the dataframe df_department
+View(df_department)
+```
+
 
 ```{r merge-data, warning=FALSE} 
 ## Now, combine the two data frames
-df_total <- function_name()
+df_total <- rbind(df_retail, df_department)
 ```
+
+```{r}
+# view df_total
+View(df_total)
+```
+
 
 ```{r plot, warning=FALSE, fig.width=10} 
 ## Plot Retail Sales data
