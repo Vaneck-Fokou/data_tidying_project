@@ -64,10 +64,6 @@ saveRDS(df2, "df_retail.rds")
 
 ```
 
-```{r}
-df1 %>% filter()
-```
-
 ### Wrangle Data
 
 ```{r wrangle-df2, warning=FALSE} 
@@ -92,7 +88,7 @@ df_retail <- df2 %>%
 
 ```{r}
 # view the df_retail dataframe
-View(df_retail)
+glimpse(df_retail)
 ```
 
 
@@ -121,7 +117,7 @@ df_department <- df1 %>%
 
 ```{r}
 # view the dataframe df_department
-View(df_department)
+glimpse(df_department)
 ```
 
 
@@ -132,7 +128,7 @@ df_total <- rbind(df_retail, df_department)
 
 ```{r}
 # view df_total
-View(df_total)
+glimpse(df_total)
 ```
 
 
