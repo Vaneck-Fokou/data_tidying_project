@@ -1,2 +1,2 @@
 # data_tidying_project
-wrangle data before analysis and visualization
+wrangling data before analysis and visualization
